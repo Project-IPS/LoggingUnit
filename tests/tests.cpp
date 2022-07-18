@@ -2,8 +2,9 @@
 #include<cstdio>
 //Defining it here overrides all previous settings. It is guarenteed to work
 #define LOG_SETTINGS "events"
-#include <logger.h>
 
+#include <logger.h>
+// #define SET_LOG
 TEST_CASE("DEFAULT TEST"){
     SECTION("Let's see how LOGV performs"){
         //Implement the test.

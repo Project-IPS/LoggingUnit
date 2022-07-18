@@ -1,3 +1,6 @@
+#cmakedefine SET_LOG
 #ifndef LOG_SETTINGS
 #define LOG_SETTINGS "@LOG_SETTINGS@"
+
 #endif
+

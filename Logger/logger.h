@@ -5,37 +5,24 @@
 #include <stdarg.h>
 #include <string>
 #include"log_settings.h"
+// #define SET_LOG
 
+#ifdef SET_LOG
+  #define LOG(f_, ...) vprintf(((std::string)f_+"\n").c_str(), ##__VA_ARGS__)
+  #define LOGV(f_, ...) logv(f_, ##__VA_ARGS__)
+  #define LOGI(f_, ...) logi(f_, ##__VA_ARGS__)
+  #define LOGW(f_, ...) logw(f_, ##__VA_ARGS__)
+  #define LOGE(f_, ...) loge(f_, ##__VA_ARGS__)
 
-#ifndef LOG
-#define LOG(f_, ...) vprintf(((std::string)f_+"\n").c_str(), ##__VA_ARGS__)
-#endif
-
-#ifndef LOGV
-#define LOGV(f_, ...) logv(f_, ##__VA_ARGS__)
-#endif
-
-#ifndef LOGI
-#define LOGI(f_, ...) logi(f_, ##__VA_ARGS__)
-#endif
-
-#ifndef LOGW
-#define LOGW(f_, ...) logw(f_, ##__VA_ARGS__)
-#endif
-
-#ifndef LOGE
-#define LOGE(f_, ...) loge(f_, ##__VA_ARGS__)
-#endif
-
-void logv(const char *format, ...){
-  va_list args;
+  void logv(const char *format, ...){
+    va_list args;
   
-  if(LOG_SETTINGS == "verbose"){
-    va_start( args, format );
-    LOG(format, args); 
-    va_end( args );
+    if(LOG_SETTINGS == "verbose"){
+      va_start( args, format );
+      LOG(format, args); 
+      va_end( args );
+    }
   }
-}
 
 void logi(const char *format, ...){
   va_list args;
@@ -66,5 +53,11 @@ void loge(const char *format, ...){
     va_end( args );
   }
 }
-
+#else
+  #define LOG(f_, ...) ((void)0)
+  #define LOGI(f_, ...) ((void)0)
+  #define LOGE(f_, ...) ((void)0)
+  #define LOGV(f_, ...) ((void)0)
+  #define LOGW(f_,...) ((void)0)
+  #endif
 #endif
